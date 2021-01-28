@@ -1,113 +1,87 @@
 const fs = require('fs');
-const serviceDir =
-  '/Users/bennea27/Documents/workspace/simorgh/src/app/lib/config/services';
+const serviceDir = '../../../../src/app/lib/config/services';
 const { service } = require(serviceDir + '/news.js');
 
 it('stuff', () => {
-  const serviceFiles = fs.readdirSync(serviceDir);
+  const serviceFiles = fs.readdirSync('src/app/lib/config/services');
 
   const { consentBanner } = service.default.translations;
 
   console.log(JSON.stringify(consentBanner, null, 2));
 
-  const oldDescription = consentBanner.cookie.description;
-
-  // consentBanner.cookie.title = {
-  //   amp: consentBanner.cookie.title,
-  //   canonical: consentBanner.cookie.title,
-  // };
-
-  // consentBanner.cookie.description = {
-  //   amp: {
-  //     default: oldDescription,
-  //     manage: oldDescription,
-  //   },
-  //   canonical: oldDescription,
-  // };
-
-  // consentBanner.cookie.accept = {
-  //   amp: consentBanner.cookie.accept,
-  //   canonical: consentBanner.cookie.accept,
-  // };
-
-  // consentBanner.cookie.reject = {
-  //   amp: consentBanner.cookie.reject,
-  //   canonical: consentBanner.cookie.reject,
-  // };
-
   const content = parseSheetContent();
 
   consentBanner.cookie = {
+    accept: content['7'],
+    reject: content['9'],
     amp: {
-      title: content['4'],
-      description: {
-        default: {
-          para1: content['5'],
-          para2: content['6'],
+      initial: {
+        title: content['4'],
+        description: {
+          uk: {
+            para1: content['5'],
+            para2: content['6'],
+          },
+          international: {
+            para1: content['5'],
+            para2: content['6'],
+          },
         },
-        manage: {
-          heading1: content['10'],
-          para1: content['11'],
-          para2: content['12'],
-          heading2: content['13'],
-          para3: content['14'],
-          para4: {
-            text: content['15'],
-            url: 'blah',
+        manage: 'Manage settings',
+      },
+      manage: {
+        title: content['10'],
+        description: {
+          uk: {
+            para1: content['11'],
+            para2: content['12'],
+            heading2: content['13'],
+            para3: content['14'],
+            para4: {
+              text: content['15'],
+              url: 'blah',
+            },
+            para5: content['16'],
+            heading3: content['17'],
+            para6: content['18'],
+            para7: {
+              text: content['19'],
+              url: 'blah',
+            },
+            para8: content['20'],
+            para9: content['21'],
           },
-          para5: content['16'],
-          heading3: content['17'],
-          para6: content['18'],
-          para7: {
-            text: content['19'],
-            url: 'blah',
+          international: {
+            para1: content['11'],
+            para2: content['12'],
+            heading2: content['13'],
+            para3: content['14'],
+            para4: {
+              text: content['15'],
+              url: 'blah',
+            },
+            para5: content['16'],
+            heading3: content['17'],
+            para6: content['18'],
+            para7: {
+              text: content['19'],
+              url: 'blah',
+            },
+            para8: content['20'],
+            para9: content['21'],
           },
-          para8: content['20'],
-          para9: content['21'],
-          accept: content['7'],
-          reject: content['9'],
         },
       },
-      accept: content['7'],
-      reject: content['9'],
     },
     canonical: {
       title: consentBanner.cookie.title,
       description: consentBanner.cookie.description,
       accept: consentBanner.cookie.accept,
       reject: consentBanner.cookie.reject,
+      rejectUrl:
+        'https://www.bbc.co.uk/usingthebbc/cookies/how-can-i-change-my-bbc-cookie-settings/',
     },
   };
-
-  // consentBanner.cookie.title.amp = content['4'];
-  // consentBanner.cookie.description.amp.default = {
-  //   para1: content['5'],
-  //   para2: content['6'],
-  // };
-  // consentBanner.cookie.accept.amp = content['7'];
-  // consentBanner.cookie.reject.amp = content['8'];
-  // consentBanner.cookie.description.amp.manage = {
-  //   heading1: content['10'],
-  //   para1: content['11'],
-  //   para2: content['12'],
-  //   heading2: content['13'],
-  //   para3: content['14'],
-  //   para4: {
-  //     text: content['15'],
-  //     url: 'blah',
-  //   },
-  //   para5: content['16'],
-  //   heading3: content['17'],
-  //   para6: content['18'],
-  //   para7: {
-  //     text: content['19'],
-  //     url: 'blah',
-  //   },
-  //   para8: content['20'],
-  //   para9: content['21'],
-  //   accept: content['7'],
-  //   reject: content['9'],
-  // };
 
   console.log('\n\n\n');
 
