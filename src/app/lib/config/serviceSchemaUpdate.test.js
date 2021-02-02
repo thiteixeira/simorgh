@@ -10,7 +10,7 @@ const clipboardy = require('clipboardy');
 it('stuff', () => {
   const serviceFiles = fs.readdirSync('src/app/lib/config/services');
 
-  const { consentBanner } = service.default.translations;
+  const { consentBanner } = service.trad.translations;
 
   // console.log(JSON.stringify(consentBanner, null, 2));
 
@@ -70,7 +70,9 @@ it('stuff', () => {
     /cookie: {(.|\n)*media:/g,
     `cookie: ${newCookie}\},media:`,
   );
-  fs.writeFileSync(filePath, output);
+  // fs.writeFileSync(filePath, output);
+
+  clipboardy.writeSync(newCookie);
 });
 
 const parseSheetContent = () => {
@@ -87,8 +89,17 @@ const parseSheetContent = () => {
     return Object.assign({}, ...first);
   };
 
-  // const joinKey = [[22, 23]];
-  const joinKey = [];
+  // const joinKey = [
+  //   [15, 16],
+  //   [20, 21],
+  //   [24, 25],
+  // ];
+  const joinKey = [
+    // [8, 9],
+    // [7, 8],
+  ];
+
+  // const joinKey = [[7, 8]];
 
   let processed = buildKey(source.split('\n').map(x => x.trim()));
 
@@ -96,6 +107,9 @@ const parseSheetContent = () => {
 
   joinKey.forEach(([dest, source]) => {
     processed[dest] = `${processed[dest]}\n${processed[source]}`.trim();
+  });
+
+  joinKey.forEach(([dest, source]) => {
     delete processed[source];
   });
 
