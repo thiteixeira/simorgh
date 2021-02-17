@@ -110,6 +110,7 @@
     "@bbc/psammead-timestamp-container": "5.0.25",
     "@bbc/psammead-useful-links": "3.0.14",
     "@bbc/psammead-visually-hidden-text": "2.0.3",
+    "@bbc/reverb": "https://github.com/bbc/reverb.git#2.0.3",
     "@bbc/web-vitals": "1.0.2",
     "@emotion/cache": "11.1.3",
     "@emotion/react": "11.1.4",
