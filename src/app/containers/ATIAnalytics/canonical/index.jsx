@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { string } from 'prop-types';
-import sendBeacon from '#lib/analyticsUtils/sendBeacon';
+import { ReverbClient } from '@bbc/reverb';
 
 const getNoJsATIPageViewUrl = atiPageViewUrl =>
   atiPageViewUrl.includes('x8=[simorgh]')
@@ -23,12 +23,19 @@ const renderNoScriptTrackingPixel = atiPageViewUrl => (
 );
 
 const CanonicalATIAnalytics = ({ pageviewParams }) => {
+  const Reverb = new ReverbClient({
+    getPageVariables: () => Promise.resolve(pageviewParams),
+    getUserVariables: () => Promise.resolve({}),
+  });
+
   const [atiPageViewUrl] = useState(
     process.env.SIMORGH_ATI_BASE_URL + pageviewParams,
   );
 
   useEffect(() => {
-    sendBeacon(atiPageViewUrl);
+    Reverb.initialise().then(async () => {
+      Reverb.viewEvent();
+    });
   }, [atiPageViewUrl]);
 
   return renderNoScriptTrackingPixel(atiPageViewUrl);
