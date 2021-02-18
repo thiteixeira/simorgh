@@ -24,7 +24,24 @@ const renderNoScriptTrackingPixel = atiPageViewUrl => (
 
 const CanonicalATIAnalytics = ({ pageviewParams }) => {
   const Reverb = new ReverbClient({
-    getPageVariables: () => Promise.resolve(pageviewParams),
+    getPageVariables: () =>
+      Promise.resolve({
+        name: 'news.articles.c0000000001o.page',
+        destination: 'NEWS_PS_TEST',
+        producer: 'NEWS',
+        section: null,
+        site: 'news',
+        contentId: 'urn:bbc:optimo:c0000000001o',
+        contentType: 'article',
+        edition: '' || null,
+        language: 'en-GB',
+        additionalProperties: {
+          app_type: 'responsives',
+          app_name: 'news',
+          custom_var_1: '2018-01-01T12:01:00.000Z',
+          custom_var_2: '2018-01-01T13:00:00.000Z',
+        },
+      }),
     getUserVariables: () => Promise.resolve({}),
   });
 
